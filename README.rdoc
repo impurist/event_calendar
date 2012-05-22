@@ -199,7 +199,8 @@ The default options for the calendar are:
     
     :use_all_day => false,
     :use_javascript => true,
-    :link_to_day_action => false
+    :link_to_day_action => false,
+    :day_header_custom_left => %(<div is="my-cell-header-text">My Header Text</div>)  #will sit to the left side of the cell header.
   }
   
 You can override any of these by passing your options to the calendar method. In the above example, update the event_calendar_options helper method.

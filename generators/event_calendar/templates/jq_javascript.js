@@ -3,12 +3,16 @@
  * Handles when events span rows, or don't have a background color
  */
 jQuery(document).ready(function($) {
-  var highlight_color = "#2EAC6A";
+  var highlight_colors = {
+    "event": "#cfcfcf",
+    "allocation": "#66ccff"
+  };
   
   // highlight events that have a background color
   $(".ec-event-bg").live("mouseover", function() {
     event_id = $(this).attr("data-event-id");
-    $(".ec-event-"+event_id).css("background-color", highlight_color);
+    event_class_name = $(this).attr("data-event-class");
+    $(".ec-event-"+event_id).css("background-color", highlight_colors[event_class_name]);
   });
   $(".ec-event-bg").live("mouseout", function() {
     event_id = $(this).attr("data-event-id");
@@ -22,7 +26,7 @@ jQuery(document).ready(function($) {
     ele.css("color", "white");
     ele.find("a").css("color", "white");
     ele.find(".ec-bullet").css("background-color", "white");
-    ele.css("background-color", highlight_color);
+    ele.css("background-color", highlight_colors["event"]);
   });
   $(".ec-event-no-bg").live("mouseout", function() {
     ele = $(this);

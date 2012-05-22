@@ -36,6 +36,7 @@ module EventCalendar
     #     will only have single-day events. Defaults to true.
     # :link_to_day_action => false # If controller action is passed,
     #     the day number will be a link. Override the day_link method for greater customization.
+    # :day_header_custom_left => <some html> text to add heading into to day cells
     #
     # For more customization, you can pass a code block to this method
     # The varibles you have to work with in this block are passed in an agruments hash:
@@ -73,7 +74,8 @@ module EventCalendar
 
         :use_all_day => false,
         :use_javascript => true,
-        :link_to_day_action => false
+        :link_to_day_action => false,
+        :day_header_custom_left => false
       }
       options = defaults.merge options
 
@@ -184,10 +186,15 @@ module EventCalendar
           cal << %(ec-other-month-header ) if (day < first) || (day > last)
           cal << %(ec-weekend-day-header) if weekend?(day)
           cal << %(" style="height: #{options[:day_nums_height]}px;">)
+          if options[:day_header_custom_left]
+            cal << %(<div class="cal_cell_header_text_left">#{options[:day_header_custom_left]}</div>)
+          end
           if options[:link_to_day_action]
+            cal << %(<strong>)
             cal << day_link(day.day, day, options[:link_to_day_action])
+            cal << %(</strong>)
           else
-            cal << %(#{day.day})
+            cal << %(<strong>#{day.day}</strong>)
           end
           cal << %(</td>)
         end

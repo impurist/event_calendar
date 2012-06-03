@@ -186,15 +186,15 @@ module EventCalendar
           cal << %(ec-other-month-header ) if (day < first) || (day > last)
           cal << %(ec-weekend-day-header) if weekend?(day)
           cal << %(" style="height: #{options[:day_nums_height]}px;">)
-          if options[:day_header_custom_left]
-            cal << %(<div class="cal_cell_header_text_left">#{options[:day_header_custom_left]}</div>)
-          end
           if options[:link_to_day_action]
             cal << %(<strong>)
             cal << day_link(day.day, day, options[:link_to_day_action])
             cal << %(</strong>)
           else
             cal << %(<strong>#{day.day}</strong>)
+          end
+          if options[:day_header_custom_left]
+            cal << %(<div class="cal_cell_header_text_left">#{options[:day_header_custom_left]}</div>)
           end
           cal << %(</td>)
         end
